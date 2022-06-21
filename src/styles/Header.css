@@ -1,0 +1,21 @@
+.header {
+  background-color: crimson;
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header__logo > h1 {
+  color: white;
+  font-size: 1.7rem;
+  font-family: "Potta One", cursive;
+}
+
+.header__nav > h3 {
+  color: white;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
