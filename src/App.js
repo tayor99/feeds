@@ -7,6 +7,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 
 function App() {
+  const [modalIsOpen, setIsOpen] = useState(false);
   const handleOpenModal = () => {
     console.log("lol");
   };
