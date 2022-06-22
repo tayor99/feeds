@@ -1,15 +1,20 @@
-import "./App.css";
-import Feeds from "./component/Feeds";
-import Header from "./component/Header";
-import BlogPost from "./component/BlogPost";
+import './App.css';
+import Feeds from './component/Feeds';
+import Header from './component/Header';
+import BlogPost from './component/BlogPost';
 
-import Modal from "react-modal";
-import { useState } from "react";
+import Modal from 'react-modal';
+import { useState } from 'react';
+
+export const BASEURL = 'https://blog-api344.herokuapp.com/blogposts';
 
 function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const handleOpenModal = () => {
-    console.log("lol");
+    setIsOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsOpen(false);
   };
   return (
     <div className="app">
@@ -17,7 +22,9 @@ function App() {
       {/* feed */}
       <Feeds />
       {/* posting to blog modal */}
-      <BlogPost />
+      <Modal isOpen={modalIsOpen} className="app__modal">
+        <BlogPost handleCloseModal={handleCloseModal} />
+      </Modal>
     </div>
   );
 }

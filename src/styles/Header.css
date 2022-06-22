@@ -5,17 +5,19 @@
   height: 80px;
   align-items: center;
   margin-bottom: 30px;
+  position: sticky;
+  top: 0;
 }
 
 .header__logo > h1 {
   color: white;
   font-size: 1.7rem;
-  font-family: "Potta One", cursive;
+  font-family: 'Potta One', cursive;
 }
 
 .header__nav > h3 {
   color: white;
-  font-family: "Shadows Into Light", cursive;
+  font-family: 'Shadows Into Light', cursive;
   font-size: 1.3rem;
   cursor: pointer;
 }
