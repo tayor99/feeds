@@ -4,9 +4,9 @@ import Header from './component/Header';
 import BlogPost from './component/BlogPost';
 
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export const BASEURL = 'https://blog-api344.herokuapp.com/blogposts';
+export const BASEURL = 'https://robotblog-api.herokuapp.com/api/blogpost/';
 
 function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
