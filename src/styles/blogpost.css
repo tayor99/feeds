@@ -1,0 +1,40 @@
+.blogpost {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.blogpost__close {
+  align-self: end;
+  padding: 10px;
+}
+.blogpost__close > button {
+  background-color: #fff;
+  border: 1px solid red;
+  padding: 10px;
+  border-radius: 47%;
+  cursor: pointer;
+  color: red;
+}
+.blogpost__form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.blogpost__form form > input,
+textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  outline: none;
+}
+.blogpost__form form > label {
+  display: block;
+  margin: 10px 0px;
+  font-family: 'Roboto', sans-serif;
+}
+.blogpost__form form > button {
+  margin-top: 10px;
+  padding: 10px;
+  cursor: pointer;
+}

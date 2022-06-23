@@ -1,30 +1,69 @@
-import "../styles/feeds.css";
+import '../styles/feeds.css';
+import { BASEURL } from '../App';
 
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { AiFillDelete } from 'react-icons/ai';
 const Feeds = () => {
+  let pages = 0;
+  const [getPosts, setGetPost] = useState([]);
+  const getBlogs = async () => {
+    try {
+      const { data } = await axios.get(`${BASEURL}?&offset=${pages} `);
+      const allPost = data?.results;
+      setGetPost((oldPost) => [...oldPost, ...allPost]);
+      console.log(pages);
+    } catch (e) {
+      console.log(e);
+    }
+    pages += 5;
+  };
+  const handleScroll = (e) => {
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
+      e.target.documentElement.scrollHeight
+    ) {
+      getBlogs();
+    }
+  };
+
+  useEffect(() => {
+    getBlogs();
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  const handleDelete = async (id) => {
+    await axios.delete(`${BASEURL}${id}`);
+    setGetPost(getPosts.filter((getPost) => getPost.id !== id));
+  };
   return (
     <div className="feeds">
-      <div className="feeds__header">
-        {/* title */}
-        <h1>Learning how to code</h1>
-        {/* Author */}
-        <p>By Adenusi Adetayo</p>
-      </div>
-      <div className="feeds__content">
-        {/* content */}
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
-          inventore ut accusantium, id est exercitationem itaque non iure iusto
-          dicta similique soluta eveniet et? Excepturi voluptatem quas ducimus.
-          Labore, maiores. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Ipsam, minima ad. Repellat magni accusamus commodi et eius
-          vitae, sit excepturi. Necessitatibus, tempora veniam officiis
-          molestiae harum corporis voluptatem eaque asperiores? Lorem ipsum
-          dolor sit amet, consectetur adipisicing elit. Porro, quas architecto?
-          Veniam, cupiditate ipsam provident quidem obcaecati iste aut vitae
-          labore fugiat adipisci, laudantium eaque iure expedita. Quis, cum
-          doloribus!
-        </p>
-      </div>
+      {getPosts.map((getPost) => {
+        return (
+          <div className="feeds__blog" key={getPost?.id}>
+            <div className="feeds__post">
+              <div className="feeds__header">
+                {/* title */}
+                <h1>
+                  {getPost?.title} {getPost?.id}
+                </h1>
+                {/* Author */}
+                <p>By {getPost?.author}</p>
+              </div>
+              <div className="feeds__content">
+                {/* content */}
+                <p>{getPost?.content} </p>
+              </div>
+            </div>
+
+            <div className="feeds__delete">
+              <AiFillDelete onClick={() => handleDelete(getPost?.id)} />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
